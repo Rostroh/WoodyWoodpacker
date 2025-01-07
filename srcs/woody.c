@@ -27,11 +27,6 @@ static int		read_file(t_pars *pam)
 		return (-1);
 	lseek(pam->src_fd, 0, SEEK_SET);
 	read(pam->src_fd, pam->content, len);
-	/*while ((len = read(pam->src_fd, pam->content + off, BUFFLEN)) > 0)
-	{	
-		printf("------------------+1 ligne------------------\n");
-		off += len;
-	}*/
 	return (0);
 }
 
@@ -117,15 +112,6 @@ static void		patch(t_pars *pam)
 	if ((offset = find_pattern32(pam->content + pam->off_gap + POFF, 0xAAAAAAAA, PSIZE)) < 0)
 		printf("0xAAAAAAAA not found\n");	
 	patch_addr(pam, temp->e_entry - pam->sect.sh_addr - (pam->expanded == 1 ? SEGSZ : 0), offset);
-	/*if (pam->expanded == 1)
-	{
-		patch_addr(pam, temp->e_entry - pam->hdr.e_entry, offset);
-	}
-	else
-	{
-		//patch_addr(pam, temp->e_entry - pam->sect.sh_offset, offset);
-		//patch_addr(pam, temp->e_entry - pam->hdr.e_entry, offset);
-	}*/
 	if ((offset = find_pattern32(pam->content + pam->off_gap + POFF, 0xBBBBBBBB, PSIZE)) < 0)
 		printf("0xBBBBBBBB not found\n");
 	patch_len(pam, pam->sect.sh_size, offset);
@@ -214,7 +200,6 @@ int				woody(t_pars pam)
 	encrypt(&pam);
 	patch(&pam);
 	write(pam.dst_fd, pam.content, pam.len);
-	free(pam.key);
 	free(pam.content);
 	return (0);
 }

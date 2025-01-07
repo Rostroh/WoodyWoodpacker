@@ -166,7 +166,6 @@ void		expand(t_pars *pam)
 	uint32_t	off;
 	char		*expanded;
 
-	printf("expand\n");
 	pam->len += SEGSZ;
 	expanded = (char *)malloc(sizeof(char) * pam->len + GSIZE + 18);
 	pam->expanded = 1;

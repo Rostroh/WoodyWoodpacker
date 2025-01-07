@@ -24,5 +24,6 @@ int				main(int ac, char **av)
 	param.fname = av[optind];
 	if (woody(param) == 0)
 		print_key(param.key, param.klen);
+	free(param.key);
 	return (0);
 }

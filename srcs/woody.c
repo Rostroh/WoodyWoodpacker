@@ -26,15 +26,12 @@ static int		read_file(t_pars *pam)
 	if (!(pam->content = (uint8_t *)malloc(sizeof(uint8_t) * len)))
 		return (-1);
 	lseek(pam->src_fd, 0, SEEK_SET);
-	printf("len = %d\n", len);
-	printf("------------------BEFORE READ------------------\n");
 	read(pam->src_fd, pam->content, len);
 	/*while ((len = read(pam->src_fd, pam->content + off, BUFFLEN)) > 0)
 	{	
 		printf("------------------+1 ligne------------------\n");
 		off += len;
 	}*/
-	printf("------------------AFTER READ------------------\n");
 	return (0);
 }
 

@@ -10,7 +10,11 @@ static uint8_t		*creat_key(void)
 	if ((randfd = open("/dev/urandom", O_RDONLY)) <= 0)
 		return (NULL);
 	if ((len = read(randfd, key, KEY_DSIZE)) < KEY_DSIZE)
+	{
+		close(randfd);
 		return (NULL);
+	}
+	close(randfd);
 	return (key);
 }
 

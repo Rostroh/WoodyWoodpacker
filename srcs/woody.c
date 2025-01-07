@@ -7,6 +7,7 @@ static int		open_file(t_pars *pam)
 	if ((pam->dst_fd = open(EXEC_NAME, O_CREAT | O_WRONLY, 0755)) < 0)
 	{
 		printf("Couldn't open %s\n", EXEC_NAME);
+		close(pam->src_fd);
 		return (-1);
 	}
 	return (0);
@@ -18,13 +19,22 @@ static int		read_file(t_pars *pam)
 	int		len;
 
 	off = 0;
+	if (off)
+		off = off;
 	len = lseek(pam->src_fd, 0, SEEK_END);
 	pam->len = len;
 	if (!(pam->content = (uint8_t *)malloc(sizeof(uint8_t) * len)))
 		return (-1);
-	len = lseek(pam->src_fd, 0, SEEK_SET);
-	while ((len = read(pam->src_fd, pam->content + off, BUFFLEN)) > 0)
+	lseek(pam->src_fd, 0, SEEK_SET);
+	printf("len = %d\n", len);
+	printf("------------------BEFORE READ------------------\n");
+	read(pam->src_fd, pam->content, len);
+	/*while ((len = read(pam->src_fd, pam->content + off, BUFFLEN)) > 0)
+	{	
+		printf("------------------+1 ligne------------------\n");
 		off += len;
+	}*/
+	printf("------------------AFTER READ------------------\n");
 	return (0);
 }
 
@@ -189,7 +199,11 @@ int				woody(t_pars pam)
 	if (read_file(&pam) == -1)
 		return (-1);
 	if (check_elf(&pam) == -1)
+	{
+		free(pam.key);
+		free(pam.content);
 		return (-1);
+	}
 	if ((len = find_gap(&pam, pam.hdr)) < GSIZE)
 	{
 		expand(&pam);
@@ -203,5 +217,7 @@ int				woody(t_pars pam)
 	encrypt(&pam);
 	patch(&pam);
 	write(pam.dst_fd, pam.content, pam.len);
+	free(pam.key);
+	free(pam.content);
 	return (0);
 }

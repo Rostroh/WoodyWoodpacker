@@ -6,14 +6,9 @@
 #    By: rostroh <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 18:41:32 by rostroh           #+#    #+#              #
-#    Updated: 2025/01/23 14:59:38 by rostroh          ###   ########.fr        #
+#    Updated: 2022/09/16 13:24:55 by rostroh          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-_GREEN=\033[32m
-_PURPLE=\033[35m
-_BOLD=\033[1m
-_DEFAULT=\033[0m
 
 NAME = libft.a
 
@@ -56,14 +51,12 @@ all:
 	@mkdir -p ./obj
 	@mkdir -p ./obj/printf
 	@make $(NAME)
-	printf "${_BOLD}${_PURPLE}[libft ${_GREEN}ok${_PURPLE}]${_DEFAULT}\n"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	printf "${_BOLD}${_PURPLE}[libft]${_DEFAULT} gcc $(FLG) -I $(HEAD_DIR) -o $@ -c $<\n"
 	gcc $(FLG) -I $(HEAD_DIR) -o $@ -c $<
 
 $(NAME): $(OBJ_PATH)
-	@echo create $(NAME)
+	@echo creat $(NAME)
 	@ar rc $@ $(OBJ_PATH)
 
 clean:

@@ -61,7 +61,6 @@ update: $(OBJS_PAYLOAD)
 	./update_script
 
 $(NAME): $(OBJS)
-	@echo "Bonjour ici"
 	rm -rf woody
 	printf "${_BOLD}${_BLUE}[$(NAME)]${_DEFAULT} rm -rf woody\n"
 	nasm -felf64 $(ASM_DIR)/$(SRC_ASM)

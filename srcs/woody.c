@@ -183,7 +183,6 @@ int				woody(t_pars pam)
 		return (-1);
 	if (check_elf(&pam) == -1)
 	{
-		free(pam.key);
 		free(pam.content);
 		return (-1);
 	}

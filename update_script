@@ -3,7 +3,7 @@
 function init1()
 {
 	src="asm_src/message.asm"
-	obj="asm_src/message.o"
+	obj="objs/message.o"
 	def="MESSAGE"
 	size="# define MSIZE"
 }
@@ -11,7 +11,7 @@ function init1()
 function init2()
 {
 	src="asm_src/prep.asm"
-	obj="asm_src/prep.o"
+	obj="objs/prep.o"
 	def="PREP"
 	size="# define PSIZE"
 }
@@ -19,7 +19,7 @@ function init2()
 function init3()
 {
 	src="asm_src/rc4.asm"
-	obj="asm_src/rc4.o"
+	obj="objs/rc4.o"
 	def="RC4"
 	size="# define RSIZE"
 }
@@ -27,7 +27,7 @@ function init3()
 function init4()
 {
 	src="asm_src/end.asm"
-	obj="asm_src/end.o"
+	obj="objs/end.o"
 	def="END"
 	size="# define ESIZE"
 }
@@ -37,7 +37,7 @@ function update()
 {
 	inc=include/woody.h
 	shellcode=""
-	nasm -felf64 $src
+	#nasm -felf64 $src
 	for i in $(objdump -d $obj | grep "^ "| cut -f2)
 	do
 		shellcode="$shellcode$i"

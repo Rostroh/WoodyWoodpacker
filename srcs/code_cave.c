@@ -18,6 +18,8 @@ int			off_next_sect(t_pars *pam, EHDR hdr, EPHR *phdr)
 				closest = actual;
 		}
 	}
+	if (!closest)
+		return (0);
 	return (closest->p_offset - (phdr->p_offset + phdr->p_filesz));
 }
 
@@ -54,7 +56,7 @@ int			find_gap(t_pars *pam, EHDR hdr)
 	pam->new_seg = NULL;
 	for (int i = 0; i < hdr.e_phnum; i++)
 	{
-		phdr = (EPHR*)(pam->content + hdr.e_phoff + hdr.e_phentsize * i);
+	phdr = (EPHR*)(pam->content + hdr.e_phoff + hdr.e_phentsize * i);
 		if (phdr->p_type == PT_LOAD && (phdr->p_flags & PF_X))
 		{
 			pam->seg = *phdr;

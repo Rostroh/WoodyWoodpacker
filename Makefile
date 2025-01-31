@@ -31,7 +31,7 @@ LIB_DIR = ./libft
 LFT = $(LIB_DIR)/$(LIBFT)
 LIB = -L $(LIB_DIR) -l$(LIBFT:lib%.a=%)
 
-FLG = -Wno-format -Wall -Werror -Wextra
+FLG = -Wno-format -Wall -Werror -Wextra -fanalyzer
 MAKEFLAGS += -s
 
 CC = gcc

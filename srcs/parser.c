@@ -8,7 +8,10 @@ static uint8_t		*creat_key(void)
 
 	key = (uint8_t *)malloc(sizeof(uint8_t) * KEY_DSIZE);
 	if ((randfd = open("/dev/urandom", O_RDONLY)) <= 0)
+	{
+		free(key);	
 		return (NULL);
+	}
 	if ((len = read(randfd, key, KEY_DSIZE)) < KEY_DSIZE)
 	{
 		close(randfd);

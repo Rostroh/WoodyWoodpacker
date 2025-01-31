@@ -36,8 +36,11 @@ MAKEFLAGS += -s
 
 CC = gcc
 
+.PHONY: update
+
 all:
 	$(MAKE) -C $(LIB_DIR)
+	$(MAKE) update
 	$(MAKE) $(NAME)
 	printf "${_BOLD}${_BLUE}[$(NAME) ${_GREEN}ok${_BLUE}]${_DEFAULT}\n"
 
@@ -51,16 +54,14 @@ $(OBJ_DIR)/%.o: $(PAYLOAD_DIR)/%.asm
 	printf "${_BOLD}${_BLUE}[$(NAME)]${_DEFAULT} nasm -elf64 $< -o $@\n"
 	nasm -felf64 $< -o $@
 
-$(OBJS): $(OBJS_PAYLOAD) update
+$(OBJS): $(HEAD)
 
-$(OBJS_PAYLOAD): $(HEAD)
-
-update:
+update: $(OBJS_PAYLOAD)
 	printf "${_BOLD}${_BLUE}[$(NAME)]${_DEFAULT} ./update_script\n"
 	./update_script
 
 $(NAME): $(OBJS)
-	#$(MAKE) update
+	@echo "Bonjour ici"
 	rm -rf woody
 	printf "${_BOLD}${_BLUE}[$(NAME)]${_DEFAULT} rm -rf woody\n"
 	nasm -felf64 $(ASM_DIR)/$(SRC_ASM)
@@ -80,3 +81,4 @@ fclean: clean
 re:
 	$(MAKE) fclean
 	$(MAKE) all
+

@@ -24,5 +24,5 @@ code:
 
 string:
 	call code
-	db '....WAODY....',0x0A
+	db '....WOODY....',0x0A
 

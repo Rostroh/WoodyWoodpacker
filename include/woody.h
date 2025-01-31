@@ -46,7 +46,7 @@
 
 # define SEG_EX 4096
 
-# define MESSAGE "9090909052eb185e4831c0b0014889c74889fa4883c20d0f055ae9a6aaaaaae8e3ffffff2e2e2e2e57414f44592e2e2e2e0a"
+# define MESSAGE "9090909052eb185e4831c0b0014889c74889fa4883c20d0f055ae9a6aaaaaae8e3ffffff2e2e2e2e574f4f44592e2e2e2e0a"
 # define MSIZE 50
 
 # define PREP "57565251bfaaaaaaaabebbbbbbbbbaccccccccb9dddddddd"
